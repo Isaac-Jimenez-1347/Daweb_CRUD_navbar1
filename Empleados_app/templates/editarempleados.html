@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Empleado</h2>
+
+        <!-- Aquí empieza el código de la tarjeta -->
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <!-- Campo: Código del empleado (readonly) -->
+                    <div class="form-group">
+                        <input type="text" id="txtcodigo" name="txtcodigo" minlength="1" maxlength="11" 
+                            value="{{ misempleados.id_empleado }}" class="form-control" readonly required><br>
+                    </div>
+                    <!-- Campo: Nombre -->
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" value="{{ misempleados.nombre }}" 
+                            maxlength="45" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Apellido Paterno -->
+                    <div class="form-group">
+                        <input type="text" id="txtapellido_p" name="txtapellido_p" value="{{ misempleados.apellido_p }}" 
+                            maxlength="30" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Apellido Materno -->
+                    <div class="form-group">
+                        <input type="text" id="txtapellido_m" name="txtapellido_m" value="{{ misempleados.apellido_m }}" 
+                            maxlength="30" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Género -->
+                    <div class="form-group">
+                        <input type="text" id="txtgenero" name="txtgenero" value="{{ misempleados.genero }}" 
+                            maxlength="30" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Matrícula -->
+                    <div class="form-group">
+                        <input type="text" id="txtmatricula" name="txtmatricula" value="{{ misempleados.matricula }}" 
+                            maxlength="20" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Celular -->
+                    <div class="form-group">
+                        <input type="number" id="txtcelular" name="txtcelular" value="{{ misempleados.celular }}" 
+                            min="1000000000" max="9999999999" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Puesto -->
+                    <div class="form-group">
+                        <input type="text" id="txtpuesto" name="txtpuesto" value="{{ misempleados.puesto }}" 
+                            maxlength="30" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Salario -->
+                    <div class="form-group">
+                        <input type="number" id="txtsalario" name="txtsalario" value="{{ misempleados.salario }}" 
+                            class="form-control" required><br>
+                    </div>
+
+                    <!-- Botón para guardar cambios -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-dark">Actualizar Empleado</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- Fin de la tarjeta -->
+
+    </div>
+</div>
+
+{% endblock cuerpo %}

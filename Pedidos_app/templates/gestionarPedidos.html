@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+{% load static %}
+
+<div class="row"><!-- la fila -->
+
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"><!-- Columna izquierda -->
+        <h1>Registrar Pedido</h1>
+
+        <div class="card"><!-- la tarjeta -->
+            <div class="card-body">
+                <form action="{% url 'registrarPedidos' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtcodigo" name="txtcodigo" class="form-control"
+                            placeholder="ID del pedido" minlength="1" maxlength="11" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control"
+                            placeholder="Nombre del pedido" minlength="1" maxlength="45" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" id="txtfecha" name="txtfecha" class="form-control"
+                            placeholder="Fecha (DD/MM/AAAA)" minlength="1" maxlength="30" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txthora" name="txthora" class="form-control"
+                            placeholder="Hora (HH:MM)" minlength="1" maxlength="30" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtid_producto" name="txtid_producto" class="form-control"
+                            placeholder="ID Producto" minlength="1" maxlength="11" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtid_cliente" name="txtid_cliente" class="form-control"
+                            placeholder="ID Cliente" minlength="1" maxlength="11" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="txtcantidad" name="txtcantidad" class="form-control"
+                            placeholder="Cantidad" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtid_trabajador" name="txtid_trabajador" class="form-control"
+                            placeholder="ID Trabajador" minlength="1" maxlength="11" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtregistro" name="txtregistro" class="form-control"
+                            placeholder="Registro" maxlength="45" required><br>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-dark">Guardar Pedido</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- Fin de la tarjeta -->
+
+    </div><!-- Columna izquierda -->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"><!-- Columna derecha -->
+        <h1>Listado de Pedidos</h1>
+        <img class="w-50" src="{% static 'img/pedidos.jpg' %}" alt="pedidos" width="400" height="auto">
+        <br>
+        <!-- la tabla -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID Pedido</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora</th>
+                    <th scope="col">ID Producto</th>
+                    <th scope="col">ID Cliente</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">ID Trabajador</th>
+                    <th scope="col">Registro</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in mispedidos %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ p.id_pedido }}</td>
+                        <td>{{ p.nombre }}</td>
+                        <td>{{ p.fecha|date:"d/m/y" }}</td>
+                        <td>{{ p.hora }}</td>
+                        <td>{{ p.id_producto }}</td>
+                        <td>{{ p.id_cliente }}</td>
+                        <td>{{ p.cantidad }}</td>
+                        <td>{{ p.id_trabajador }}</td>
+                        <td>{{ p.registro }}</td>
+                        <td>
+                            <a href="{% url 'seleccionarPedidos' p.id_pedido %}" class="btn btn-info">Editar</a>
+                            <a href="{% url 'borrarPedidos' p.id_pedido %}" class="btn btn-danger">Borrar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Fin de la tabla -->
+    </div><!-- Columna derecha -->
+
+</div><!-- la fila -->
+
+{% endblock cuerpo %}

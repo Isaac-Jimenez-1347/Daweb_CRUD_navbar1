@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+  {% load static %}
+
+<div class="row"><!-- la fila -->
+
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"><!-- Columna izquierda -->
+        <h1>Registrar Cliente</h1>
+
+        <div class="card"><!-- la tarjeta -->
+            <div class="card-body">
+                <form action="{% url 'registrarClientes' %}" method="POST">
+                    {% csrf_token %} <!-- Formulario para registrar clientes -->
+                    <div class="form-group">
+                        <input type="text" id="txtcodigo" name="txtcodigo" class="form-control"
+                            placeholder="id del cliente" minlength="1" maxlength="11" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control"
+                            placeholder="Nombre del cliente" minlength="1" maxlength="45" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtapellido_p" name="txtapellido_p" class="form-control"
+                            placeholder="Apellido Paterno" minlength="1" maxlength="30" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtapellido_m" name="txtapellido_m" class="form-control"
+                            placeholder="Apellido Materno" minlength="1" maxlength="30" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" id="txtfecha_nac" name="txtfecha_nac" class="form-control"
+                            placeholder="Fecha de nacimiento (DD/MM/AAAA)" minlength="10" maxlength="10" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="txtemail" name="txtemail" class="form-control"
+                            placeholder="Email" maxlength="20" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="txtcelular" name="txtcelular" class="form-control"
+                            placeholder="Celular" min="1000000000" max="9999999999" required><br>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-dark">Guardar Cliente</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- Fin de la tarjeta -->
+
+    </div><!-- Columna izquierda -->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"><!-- columna derecha -->
+        <h1>Listado de Clientes</h1>
+    <img class="w-50" src="{% static 'img/cliente.png' %}" alt="isaac" width"400" height>
+    <br>
+        <!-- la tabla -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido Paterno</th>
+                    <th scope="col">Apellido Materno</th>
+                    <th scope="col">Fecha Nacimiento</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Celular</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for c in misclientes %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ c.id_cliente }}</td> <!-- Cambié "cliente" por "c" -->
+                        <td>{{ c.nombre }}</td> <!-- Cambié "cliente" por "c" -->
+                        <td>{{ c.apellido_p }}</td> <!-- Cambié "cliente" por "c" -->
+                        <td>{{ c.apellido_m }}</td> <!-- Cambié "cliente" por "c" -->
+                        <td>{{ c.fecha_nac |date:"d/m/y"}}</td> <!-- Cambié "cliente" por "c" -->
+                        <td>{{ c.email }}</td> <!-- Cambié "cliente" por "c" -->
+                        <td>{{ c.celular }}</td> <!-- Cambié "cliente" por "c" -->
+                        <td>
+                            <a href="{% url 'seleccionarClientes' c.id_cliente %}" class="btn btn-info">Editar</a>
+                            <a href="{% url 'borrarClientes' c.id_cliente %}" class="btn btn-danger">Borrar</a>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+        <!-- Fin de la tabla -->
+    </div><!-- columna derecha -->
+
+</div><!-- la fila -->
+
+{% endblock cuerpo %}

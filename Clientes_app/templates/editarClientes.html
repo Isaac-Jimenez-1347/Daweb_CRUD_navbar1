@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Cliente</h2>
+
+        <!-- Aquí empieza el código de la tarjeta -->
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarClientes/" method="POST"> 
+                    {% csrf_token %}
+                    
+                    <!-- Campo: Código del cliente (readonly) -->
+                    <div class="form-group">
+                        <input type="text" id="txtcodigo" name="txtcodigo" minlength="1" maxlength="11" 
+                            value="{{ misclientes.id_cliente }}" class="form-control" readonly required><br>
+                    </div>
+                    <!-- Campo: Nombre -->
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" value="{{ misclientes.nombre }}" 
+                            maxlength="45" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Apellido Paterno -->
+                    <div class="form-group">
+                        <input type="text" id="txtapellido_p" name="txtapellido_p" value="{{ misclientes.apellido_p }}" 
+                            maxlength="30" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Apellido Materno -->
+                    <div class="form-group">
+                        <input type="text" id="txtapellido_m" name="txtapellido_m" value="{{ misclientes.apellido_m }}" 
+                            maxlength="30" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Fecha de Nacimiento -->
+                    <div class="form-group">
+                        <input type="date" id="txtfecha_nac" name="txtfecha_nac" value="{{ misclientes.fecha_nac }}" 
+                            minlength="10" maxlength="10" class="form-control" placeholder="DD/MM/YYYY" required><br>
+                    </div>
+
+                    <!-- Campo: Email -->
+                    <div class="form-group">
+                        <input type="email" id="txtemail" name="txtemail" value="{{ misclientes.email }}" 
+                            maxlength="20" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Celular -->
+                    <div class="form-group">
+                        <input type="number" id="txtcelular" name="txtcelular" value="{{ misclientes.celular }}" 
+                            min="1000000000" max="9999999999" class="form-control" required><br>
+                    </div>
+
+                    <!-- Botón para guardar cambios -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-dark">Guardar Cliente</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- Fin de la tarjeta -->
+
+    </div>
+</div>
+
+{% endblock cuerpo %}

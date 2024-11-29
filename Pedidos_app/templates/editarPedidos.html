@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Pedido</h2>
+
+        <!-- Aquí empieza el código de la tarjeta -->
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarPedido/" method="POST">
+                    {% csrf_token %}
+                    
+                    <!-- Campo: ID Pedido (readonly) -->
+                    <div class="form-group">
+                        <input type="text" id="txtcodigo" name="txtcodigo" minlength="1" maxlength="11" 
+                            value="{{ mispedidos.id_pedido }}" class="form-control" readonly required><br>
+                    </div>
+
+                    <!-- Campo: Nombre -->
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" value="{{ mispedidos.nombre }}" 
+                            maxlength="45" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Fecha -->
+                    <div class="form-group">
+                        <input type="date" id="txtfecha" name="txtfecha" value="{{ mispedidos.fecha }}" 
+                            maxlength="30" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Hora -->
+                    <div class="form-group">
+                        <input type="text" id="txthora" name="txthora" value="{{ mispedidos.hora }}" 
+                            maxlength="30" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: ID Producto -->
+                    <div class="form-group">
+                        <input type="text" id="txtid_producto" name="txtid_producto" value="{{ mispedidos.id_producto }}" 
+                            maxlength="11" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: ID Cliente -->
+                    <div class="form-group">
+                        <input type="text" id="txtid_cliente" name="txtid_cliente" value="{{ mispedidos.id_cliente }}" 
+                            maxlength="11" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Cantidad -->
+                    <div class="form-group">
+                        <input type="number" id="txtcantidad" name="txtcantidad" value="{{ mispedidos.cantidad }}" 
+                            class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: ID Trabajador -->
+                    <div class="form-group">
+                        <input type="text" id="txtid_trabajador" name="txtid_trabajador" value="{{ mispedidos.id_trabajador }}" 
+                            maxlength="11" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Registro -->
+                    <div class="form-group">
+                        <input type="text" id="txtregistro" name="txtregistro" value="{{ mispedidos.registro }}" 
+                            maxlength="45" class="form-control" required><br>
+                    </div>
+
+                    <!-- Botón para guardar cambios -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-dark">Guardar Pedido</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- Fin de la tarjeta -->
+    </div>
+</div>
+
+{% endblock cuerpo %}

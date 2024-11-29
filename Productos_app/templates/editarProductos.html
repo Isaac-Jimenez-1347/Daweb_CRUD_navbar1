@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Producto</h2>
+
+        <!-- Aquí empieza el código de la tarjeta -->
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarProducto/" method="POST">
+                    {% csrf_token %}
+                    
+                    <!-- Campo: ID Producto (readonly) -->
+                    <div class="form-group">
+                        <input type="text" id="txtcodigo" name="txtcodigo" minlength="1" maxlength="11" 
+                            value="{{ misproductos.id_producto }}" class="form-control" readonly required><br>
+                    </div>
+                    
+                    <!-- Campo: Nombre -->
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" value="{{ misproductos.nombre }}" 
+                            maxlength="45" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Tipo -->
+                    <div class="form-group">
+                        <input type="text" id="txttipo" name="txttipo" value="{{ misproductos.tipo }}" 
+                            maxlength="30" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Descripción -->
+                    <div class="form-group">
+                        <textarea id="txtdescripcion" name="txtdescripcion" class="form-control" required>{{ misproductos.descripcion }}</textarea><br>
+                    </div>
+
+                    <!-- Campo: Color -->
+                    <div class="form-group">
+                        <input type="text" id="txtcolor" name="txtcolor" value="{{ misproductos.color }}" 
+                            maxlength="30" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Material -->
+                    <div class="form-group">
+                        <input type="text" id="txtmaterial" name="txtmaterial" value="{{ misproductos.material }}" 
+                            maxlength="30" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Precio -->
+                    <div class="form-group">
+                        <input type="number" id="txtprecio" name="txtprecio" value="{{ misproductos.precio }}" 
+                            class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: ID Sucursal -->
+                    <div class="form-group">
+                        <input type="text" id="txtid_sucursal" name="txtid_sucursal" value="{{ misproductos.id_sucursal }}" 
+                            maxlength="11" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: ID Proveedor -->
+                    <div class="form-group">
+                        <input type="text" id="txtid_provedor" name="txtid_provedor" value="{{ misproductos.id_provedor }}" 
+                            maxlength="11" class="form-control" required><br>
+                    </div>
+
+                    <!-- Botón para guardar cambios -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-dark">Guardar Producto</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- Fin de la tarjeta -->
+    </div>
+</div>
+
+{% endblock cuerpo %}
