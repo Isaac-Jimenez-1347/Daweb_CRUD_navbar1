@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+ {% load static %}
+
+<div class="row"><!-- la fila -->
+
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"><!-- Columna izquierda -->
+        <h1>Registrar Sucursal</h1>
+
+        <div class="card"><!-- la tarjeta -->
+            <div class="card-body">
+                <form action="{% url 'registrarSucursales' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtcodigo" name="txtcodigo" class="form-control"
+                            placeholder="ID de la sucursal" minlength="1" maxlength="11" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control"
+                            placeholder="Nombre de la sucursal" minlength="1" maxlength="45" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtubicacion" name="txtubicacion" class="form-control"
+                            placeholder="Ubicación" minlength="1" maxlength="30" required><br>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="txthorarios" name="txthorarios" class="form-control"
+                            placeholder="Horarios de la sucursal" minlength="1" maxlength="300" required></textarea><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="txtemail" name="txtemail" class="form-control"
+                            placeholder="Email" maxlength="30" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="txtcelular" name="txtcelular" class="form-control"
+                            placeholder="Celular" min="1000000000" max="9999999999" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtid_empleado" name="txtid_empleado" class="form-control"
+                            placeholder="ID del empleado" maxlength="11" required><br>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-dark">Guardar Sucursal</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- Fin de la tarjeta -->
+
+    </div><!-- Columna izquierda -->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"><!-- Columna derecha -->
+        <h1>Listado de Sucursales</h1>
+        <img class="w-50" src="{% static 'img/sucursal.jpg' %}" alt="sucursales" width="400" height="auto">
+        <br>
+        <!-- la tabla -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID Sucursal</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Ubicación</th>
+                    <th scope="col">Horarios</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Celular</th>
+                    <th scope="col">ID Empleado</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in missucursales %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ s.id_sucursal }}</td>
+                        <td>{{ s.nombre }}</td>
+                        <td>{{ s.ubicacion }}</td>
+                        <td>{{ s.horarios }}</td>
+                        <td>{{ s.email }}</td>
+                        <td>{{ s.celular }}</td>
+                        <td>{{ s.id_empleado }}</td>
+                        <td>
+                            <a href="{% url 'seleccionarSucursales' s.id_sucursal %}" class="btn btn-info">Editar</a>
+                            <a href="{% url 'borrarSucursales' s.id_sucursal %}" class="btn btn-danger">Borrar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Fin de la tabla -->
+    </div>
+
+    {% endblock cuerpo %}

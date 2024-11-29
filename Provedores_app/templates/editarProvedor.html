@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Proveedor</h2>
+
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'editarProvedor' %}" method="POST">
+                    {% csrf_token %}
+                    
+                    <!-- Campo: ID Proveedor (readonly) -->
+                    <div class="form-group">
+                        <input type="text" id="txtid_provedor" name="txtid_provedor" value="{{ misprovedores.id_provedor }}" 
+                            class="form-control" readonly required><br>
+                    </div>
+                    
+                    <!-- Campo: Nombre Empresa -->
+                    <div class="form-group">
+                        <input type="text" id="txtnombre_empresa" name="txtnombre_empresa" value="{{ misprovedores.nombre_empresa }}" 
+                            class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Fecha -->
+                    <div class="form-group">
+                        <input type="date" id="txtfecha" name="txtfecha" value="{{ misprovedores.fecha }}" 
+                            class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Horarios -->
+                    <div class="form-group">
+                        <input type="text" id="txthorarios" name="txthorarios" value="{{ misprovedores.horarios }}" 
+                            class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Email -->
+                    <div class="form-group">
+                        <input type="email" id="txtemail" name="txtemail" value="{{ misprovedores.email }}" 
+                            class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Celular -->
+                    <div class="form-group">
+                        <input type="number" id="txtcelular" name="txtcelular" value="{{ misprovedores.celular }}" 
+                            class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Dirección -->
+                    <div class="form-group">
+                        <input type="text" id="txtdireccion" name="txtdireccion" value="{{ misprovedores.direccion }}" 
+                            class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Código Postal -->
+                    <div class="form-group">
+                        <input type="number" id="txtcodigo_postal" name="txtcodigo_postal" value="{{ misprovedores.codigo_postal }}" 
+                            class="form-control" required><br>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-dark">Guardar Proveedor</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- Fin de la tarjeta -->
+    </div>
+</div>
+
+{% endblock cuerpo %}

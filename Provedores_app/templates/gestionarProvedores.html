@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+{% load static %}
+
+
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h1>Registrar Proveedor</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'registrarProvedor' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtid_provedor" name="txtid_provedor" class="form-control"
+                            placeholder="ID del proveedor" minlength="1" maxlength="11" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre_empresa" name="txtnombre_empresa" class="form-control"
+                            placeholder="Nombre de la empresa" minlength="1" maxlength="45" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" id="txtfecha" name="txtfecha" class="form-control"
+                            placeholder="Fecha de establecimiento" minlength="1" maxlength="30" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txthorarios" name="txthorarios" class="form-control"
+                            placeholder="Horarios de atención" minlength="1" maxlength="30" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="txtemail" name="txtemail" class="form-control"
+                            placeholder="Email" maxlength="30" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="txtcelular" name="txtcelular" class="form-control"
+                            placeholder="Celular" min="1" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtdireccion" name="txtdireccion" class="form-control"
+                            placeholder="Dirección" maxlength="30" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="txtcodigo_postal" name="txtcodigo_postal" class="form-control"
+                            placeholder="Código postal" min="1" required><br>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-dark">Guardar Proveedor</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- Fin de la tarjeta -->
+
+    </div>
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <h1>Listado de Proveedores</h1>
+        <img class="w-50" src="{% static 'img/provedor.jpg' %}" alt="pedidos" width="400" height="auto">
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID Proveedor</th>
+                    <th scope="col">Nombre Empresa</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Horarios</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Celular</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Código Postal</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in misprovedores %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ p.id_provedor }}</td>
+                        <td>{{ p.nombre_empresa }}</td>
+                        <td>{{ p.fecha |date:"d/m/y" }}</td>
+                        <td>{{ p.horarios }}</td>
+                        <td>{{ p.email }}</td>
+                        <td>{{ p.celular }}</td>
+                        <td>{{ p.direccion }}</td>
+                        <td>{{ p.codigo_postal }}</td>
+                        <td>
+                            <a href="{% url 'seleccionarProvedor' p.id_provedor %}" class="btn btn-info">Editar</a>
+                            <a href="{% url 'borrarProvedor' p.id_provedor %}" class="btn btn-danger">Borrar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock cuerpo %}

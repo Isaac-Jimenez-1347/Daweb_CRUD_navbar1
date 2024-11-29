@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Sucursal</h2>
+
+        <!-- Aquí empieza el código de la tarjeta -->
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarSucursal/" method="POST">
+                    {% csrf_token %}
+                    
+                    <!-- Campo: ID Sucursal (readonly) -->
+                    <div class="form-group">
+                        <input type="text" id="txtcodigo" name="txtcodigo" minlength="1" maxlength="11" 
+                            value="{{ missucursales.id_sucursal }}" class="form-control" readonly required><br>
+                    </div>
+                    
+                    <!-- Campo: Nombre -->
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" value="{{ missucursales.nombre }}" 
+                            maxlength="45" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Ubicación -->
+                    <div class="form-group">
+                        <input type="text" id="txtubicacion" name="txtubicacion" value="{{ missucursales.ubicacion }}" 
+                            maxlength="30" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Horarios -->
+                    <div class="form-group">
+                        <textarea id="txthorarios" name="txthorarios" class="form-control" required>{{ missucursales.horarios }}</textarea><br>
+                    </div>
+
+                    <!-- Campo: Email -->
+                    <div class="form-group">
+                        <input type="email" id="txtemail" name="txtemail" value="{{ missucursales.email }}" 
+                            maxlength="30" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: Celular -->
+                    <div class="form-group">
+                        <input type="number" id="txtcelular" name="txtcelular" value="{{ missucursales.celular }}" 
+                            min="1000000000" max="9999999999" class="form-control" required><br>
+                    </div>
+
+                    <!-- Campo: ID Empleado -->
+                    <div class="form-group">
+                        <input type="text" id="txtid_empleado" name="txtid_empleado" value="{{ missucursales.id_empleado }}" 
+                            maxlength="11" class="form-control" required><br>
+                    </div>
+
+                    <!-- Botón para guardar cambios -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-dark">Guardar Sucursal</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- Fin de la tarjeta -->
+    </div>
+</div>
+
+{% endblock cuerpo%}
